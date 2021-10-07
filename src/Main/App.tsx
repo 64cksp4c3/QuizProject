@@ -2,8 +2,12 @@ import app_style from './App.module.scss';
 import {useSpring, a, config} from "react-spring";
 import {useControls} from "leva";
 import {FlipTexts} from "../Components/FlipExamples";
-import flip_styles from "../Components/FlipExamples.module.scss";
+import flip_styles from "../Components/FlipCarousel.module.scss";
 import {JumpTexts} from "../Components/useTransitionExamples";
+import {
+    ExampleChildPage,
+    FlipCarousel_Context,
+} from "../Components/FlipCarousel";
 
 function App() {
 
@@ -35,9 +39,13 @@ function App() {
                 <FlipTexts div_class={flip_styles.PositionFlipDiv}/>
                 <FlipTexts div_class={flip_styles.GridFlipDiv}/>
             </div>
-            <div>
-                <JumpTexts source_array={[]}/>
-            </div>
+            <JumpTexts source_array={[]}/>
+            {/*<TestDelayFunctionCallChildren Pages={FlipTexts} PagesProps={{div_class: flip_styles.PositionFlipDiv}}/>*/}
+            <FlipCarousel_Context>
+                <ExampleChildPage head={"BackSpace"}/>
+                <ExampleChildPage head={"是我们学校的创业团队"}/>
+                <ExampleChildPage head={"Yeah!"}/>
+            </FlipCarousel_Context>
         </div>
     );
 }

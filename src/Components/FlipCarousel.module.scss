@@ -1,0 +1,20 @@
+
+.PositionFlipDiv {
+  position: relative;
+
+  > * {
+    position:            absolute;
+    backface-visibility: hidden;
+  }
+}
+
+.GridFlipDiv {
+  position:    relative;
+  display:     grid;
+  place-items: center;
+
+  > * {
+    grid-area:           1/1/1/1;
+    backface-visibility: hidden;
+  }
+}

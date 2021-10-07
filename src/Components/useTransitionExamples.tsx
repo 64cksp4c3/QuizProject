@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {config, useTransition, a} from "react-spring";
 
-export const JumpTexts: FC<{ source_array: Number[] }> = ({source_array}) => {
+export const JumpTexts: FC<{ source_array: number[] }> = ({source_array}) => {
 
-    const [m_array, setM_array] = useState<Number[]>([1]);
+    const [m_array, setM_array] = useState<number[]>([1]);
 
     useEffect(
         () => {
@@ -29,7 +29,7 @@ export const JumpTexts: FC<{ source_array: Number[] }> = ({source_array}) => {
         leave: {opacity: 0},
         delay: 200,
         config: config.slow,
-    })
+    });
 
     return (
         <div style={{display: 'flex', width: '500px', overflow: 'auto'}}>
@@ -39,11 +39,12 @@ export const JumpTexts: FC<{ source_array: Number[] }> = ({source_array}) => {
                         opacity: opacity,
                         transform: opacity
                             .to(y => `translate3d(0,${y}px,0)`),
-                    }}>
+                    }}
+                    key={v}>
                     {v}
                 </a.p>
             ))}
         </div>
-    )
+    );
 
 }

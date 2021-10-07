@@ -15,6 +15,7 @@ export const FlipTexts: FC<{ div_class: string }> = ({div_class}) => {
         leave: {opacity: 0, transform: "rotateY(180deg) "},
         config: {...config.gentle},
         delay: 1000,
+        keys: index
     });
 
     useEffect(() => {
