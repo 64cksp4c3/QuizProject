@@ -1,6 +1,6 @@
 import React, {
     createContext,
-    Dispatch,
+    Dispatch, EventHandler,
     FC,
     MouseEventHandler,
     ReactNode,
@@ -10,7 +10,8 @@ import React, {
 } from "react";
 import {config, useTransition, a, UseTransitionProps} from "react-spring";
 import styles from "./FlipCarousel.module.scss";
-import {FlipTexts} from "./FlipExamples";
+import {FlipTexts} from "../TestsAndExamples/FlipExamples";
+import {BehaviourContext, BehaviourMap, BasicBehaviourTypes} from "../../Structures/BehaviourContext";
 
 export interface CommunicationProps {
     setPage_num?: React.Dispatch<React.SetStateAction<number>>
@@ -53,16 +54,21 @@ export const FlipCarousel_RenderProps:
             </div>);
     }
 
-export const SetPageNumContext =
-    createContext<Dispatch<SetStateAction<number>>>(
-        (i) => {
-            console.log(i)
-        });
+
+export interface CarouselBehaviourTypes extends BasicBehaviourTypes {
+    CarouselTypes: "Next Page" | "Last page" | "Home";
+}
+
+export const next_page_behaviour: CarouselBehaviourTypes = {CarouselTypes: "Next Page"};
+export const last_page_behaviour: CarouselBehaviourTypes = {CarouselTypes: "Last page"};
+export const home_page_behaviour: CarouselBehaviourTypes = {CarouselTypes: "Home"};
 
 export const FlipCarousel_Context:
     FC<{
         transition_props?: UseTransitionProps,
-        children: ReactNode[]
+        children: ReactNode[],
+        className?: string,
+        elementClassName?: string,
     }> =
     ({
          transition_props = {
@@ -71,7 +77,9 @@ export const FlipCarousel_Context:
              leave: {transform: "rotateY(180deg) "},
              config: config.stiff,
          },
-         children
+         children,
+         className,
+         elementClassName
      }) => {
         const page_count = children.length;
         const [page_index, setPage_index] = useState(0);
@@ -82,33 +90,55 @@ export const FlipCarousel_Context:
             if (page_index > page_count - 1) setPage_index(0);
         }, [page_index]);
 
+        let Behaviours: BehaviourMap<CarouselBehaviourTypes> = new Map([
+
+            [next_page_behaviour,
+                (e) => {
+                    setPage_index((prev_i) =>
+                        prev_i == page_count - 1 ? 0 : prev_i + 1);
+                }
+            ],
+
+            [last_page_behaviour,
+                (e) => {
+                    setPage_index((prev_i) =>
+                        prev_i == 0 ? page_count - 1 : prev_i - 1);
+                }
+            ],
+
+            [home_page_behaviour,
+                (e) => {
+                    setPage_index(0);
+                }
+            ]
+        ]);
 
         return (
-            <SetPageNumContext.Provider value={setPage_index}>
-                <div className={styles.GridFlipDiv}>
+            <BehaviourContext.Provider value={Behaviours}>
+                <div className={[styles.PositionFlipDiv, className].join(" ")}>
                     {
                         flip_transition((style, page_num) =>
                             (
-                                <a.div style={{...style}}>
+                                <a.div style={{...style}} className={elementClassName}>
                                     {children[page_num]}
                                 </a.div>
                             ))
                     }
                 </div>
-            </SetPageNumContext.Provider>);
+            </BehaviourContext.Provider>);
 
     };
 
 
 export const ExampleChildPage: FC<{ head: string }> = ({head}) => {
 
-    const setCall = useContext(SetPageNumContext);
+    const Behaviours = useContext(BehaviourContext) as BehaviourMap<CarouselBehaviourTypes>;
 
     const handleClickNext: MouseEventHandler = (e) => {
-        setCall((n) => n + 1);
+        Behaviours.get(last_page_behaviour)?.(e);
     };
     const handleClickLast: MouseEventHandler = (e) => {
-        setCall((n) => n - 1);
+        Behaviours.get(next_page_behaviour)?.(e);
     };
 
     return (
@@ -121,4 +151,5 @@ export const ExampleChildPage: FC<{ head: string }> = ({head}) => {
             </div>
         </div>);
 };
+
 

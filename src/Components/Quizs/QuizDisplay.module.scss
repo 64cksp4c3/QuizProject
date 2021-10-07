@@ -1,0 +1,30 @@
+@import "src/Components/Animations/FlipCarousel.module";
+
+.QuizDisplay {
+
+  height:           300px;
+  width:            500px;
+  position:         relative;
+  background-color: antiquewhite;
+
+
+  > :first-child {
+    height: 100%;
+    width:  100%;
+  }
+
+  .Article {
+    background-color: bisque;
+    height: 95%;
+    width: 95%;
+  }
+
+  .Solution  {
+    background-color: gray;
+    height: 95%;
+    width: 95%;
+  }
+}
+
+
+
