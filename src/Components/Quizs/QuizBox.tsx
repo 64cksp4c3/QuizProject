@@ -9,7 +9,7 @@ export const QuizBox: FC<{ Description: FC<any>, AnswerInput: FC<any>, Result: F
          Result
      }) => {
         return (
-            <div>
+            <div >
                 <FlipCarousel_Context className={box_styles.QuizDisplay}>
                     <div className={box_styles.QuizArticle}>
                         <div className={box_styles.Description}>

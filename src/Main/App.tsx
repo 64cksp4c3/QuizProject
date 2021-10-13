@@ -40,7 +40,7 @@ function App() {
                 <FlipTexts div_class={flip_styles.PositionFlipDiv}/>
                 <FlipTexts div_class={flip_styles.GridFlipDiv}/>
             </div>
-            {/*<JumpTexts source_array={[]}/>*/}
+            <JumpTexts source_array={[]}/>
             {/*<FlipCarousel_Context>*/}
             {/*    <ExampleChildPage head={"BackSpace"}/>*/}
             {/*    <ExampleChildPage head={"是我们学校的创业团队"}/>*/}

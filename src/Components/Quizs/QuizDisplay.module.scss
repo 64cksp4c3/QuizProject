@@ -8,21 +8,23 @@
   background-color: antiquewhite;
 
 
-  > :first-child {
-    height: 100%;
-    width:  100%;
-  }
-
   .Article {
-    background-color: bisque;
-    height: 95%;
-    width: 95%;
+    background-color: #c5751b;
+    position:         absolute;
+    left:             5%;
+    right:            10%;
+    bottom:           10%;
+    top:              10%;
+
   }
 
-  .Solution  {
+  .Solution {
     background-color: gray;
-    height: 95%;
-    width: 95%;
+    position:         absolute;
+    left:             5%;
+    right:            10%;
+    bottom:           10%;
+    top:              10%;
   }
 }
 

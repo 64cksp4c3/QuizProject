@@ -14,8 +14,8 @@ export const QuizDisplay: FC<{ Article: ReactNode, Solution: ReactNode }> = (
         Solution
     }) => {
     return (
-        <div>
-            <FlipCarousel_Context className={display_styles.QuizDisplay} >
+        <div className={display_styles.QuizDisplay}>
+            <FlipCarousel_Context>
                 <div className={display_styles.Article}>
                     {Article}
                     <ExampleButton/>
