@@ -41,11 +41,11 @@ function App() {
                 <FlipTexts div_class={flip_styles.GridFlipDiv}/>
             </div>
             <JumpTexts source_array={[]}/>
-            {/*<FlipCarousel_Context>*/}
-            {/*    <ExampleChildPage head={"BackSpace"}/>*/}
-            {/*    <ExampleChildPage head={"是我们学校的创业团队"}/>*/}
-            {/*    <ExampleChildPage head={"Yeah!"}/>*/}
-            {/*</FlipCarousel_Context>*/}
+            <FlipCarousel_Context>
+                <ExampleChildPage head={"BackSpace"}/>
+                <ExampleChildPage head={"是我们学校的创业团队"}/>
+                <ExampleChildPage head={"Yeah!"}/>
+            </FlipCarousel_Context>
 
             <QuizDisplay Article={
                 <div>

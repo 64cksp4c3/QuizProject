@@ -90,6 +90,13 @@ export const FlipCarousel_Context:
             if (page_index > page_count - 1) setPage_index(0);
         }, [page_index]);
 
+        let double_function={
+            a_f:()=>void ,
+            b_f:()=>void
+        }
+
+
+
         let Behaviours: BehaviourMap<CarouselBehaviourTypes> = new Map([
 
             [next_page_behaviour,
